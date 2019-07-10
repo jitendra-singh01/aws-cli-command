@@ -1,0 +1,58 @@
+EC2 
+
+Prerequisite :-
+AWS cli configured with Access key and secret access of a IAM User with EC2 Full access policy attached.
+
+Launch Instance 
+aws ec2 run-instances --image-id ami-1a2b3c4d --count 1 --instance-type c3.large --key-name MyKeyPair --security-groups MySecurityGroup
+
+Launch Instance in AZ using Subnet
+aws ec2 run-instances --image-id ami-abc12345 --count 1 --instance-type t2.micro --key-name MyKeyPair --security-group-ids sg-1a2b3c4d --subnet-id subnet-6e7f829e
+
+Launch Instance and run bootstrap script
+aws ec2 run-instances --image-id ami-abc1234 --count 1 --instance-type m4.large --key-name keypair --user-data file://my_script.txt --subnet-id subnet-abcd1234 --security-group-ids sg-abcd1234
+
+Stop a Running Instance
+aws ec2 stop-instances --instance-ids i-1234567890abcdef0
+
+Start a non-running Instance
+aws ec2 start-instances --instance-ids i-1234567890abcdef0
+
+Reboot a Instance
+aws ec2 reboot-instances --instance-ids i-1234567890abcdef5
+
+Associate Elastic IP to Instance 
+aws ec2 associate-address --instance-id i-0b263919b6498b123 --allocation-id eipalloc-64d5890a
+
+Attach Block Volume
+aws ec2 attach-volume --volume-id vol-1234567890abcdef0 --instance-id i-01474ef662b89480 --device /dev/sdf
+
+Attach ENI 
+aws ec2 attach-network-interface --network-interface-id eni-e5aa89a3 --instance-id i-1234567890abcdef0 --device-index 1
+
+Create Image 
+aws ec2 create-image --instance-id i-1234567890abcdef0 --name "My server" --description "An AMI for my server"
+
+Create Key Pair
+aws ec2 create-key-pair --key-name MyKeyPair
+
+Create Security Group
+aws ec2 create-security-group --group-name MySecurityGroup --description "My security group"
+
+Create Snapshot of Volume
+aws ec2 create-snapshot --volume-id vol-1234567890abcdef0 --description "This is my root volume snapshot
+
+Create Volume
+aws ec2 create-volume --size 80 --region us-east-1 --availability-zone us-east-1a --volume-type gp2
+
+Delete Key pair
+aws ec2 delete-key-pair --key-name MyKeyPair
+
+Delete Snapshot 
+aws ec2 delete-snapshot --snapshot-id snap-1234567890abcdef0
+
+Delete Security Group 
+aws ec2 delete-security-group --group-name MySecurityGroup
+
+Delete Volume 
+aws ec2 delete-volume --volume-id vol-049df61146c4d7901
