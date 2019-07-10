@@ -1,0 +1,34 @@
+# IAM Cli Commands 
+
+Prerequisite :-
+AWS cli configured with Access key and secret access of a IAM User with IAM Administrator access policy attached.
+ 
+Create User
+aws iam create-user --user-name Dave
+
+Create Group
+aws iam create-group --group-name Developer
+
+Add user to group
+aws iam add-user-to-group --user-name Dave --group-name Developer
+
+Create policy 
+aws iam create-policy --policy-name new-policy --policy-document file://policy
+
+Attach policy
+aws iam attach-user-policy --policy-arn arn:aws:iam:ACCOUNT-ID:aws:policy/new-policy --user-name Dave
+
+Create Access keys for User
+aws iam create-access-key --user-name Dave
+      
+Remove User from Group
+aws iam remove-user-from-group --user-name Dave --group-name   Developer
+
+Delete user
+aws iam delete-user --user-name Dave
+  
+Delete Group 
+aws iam delete-group --group-name Developer
+  
+Delete Policy
+aws iam delete-policy --policy-arn	arnlaunchlaunchlaunch:aws:iam::account-id:policy/new-policy
