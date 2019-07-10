@@ -31,4 +31,4 @@ Delete Group
 aws iam delete-group --group-name Developer
   
 Delete Policy
-aws iam delete-policy --policy-arn	arnlaunchlaunchlaunch:aws:iam::account-id:policy/new-policy
+aws iam delete-policy --policy-arn	arn:aws:iam::account-id:policy/new-policy
