@@ -28,26 +28,30 @@ aws elb delete-load-balancer --load-balancer-name my-load-balancer
 
 aws elb delete-load-balancer-listeners --load-balancer-name my-load-balancer --load-balancer-ports 80
 
-8) Deregister Instance From Load Balancer
+8) Register Instance From Load Balancer
+
+aws elb register-instances-with-load-balancer --load-balancer-name my-load-balancer --instances i-d6f6fae3
+
+9) Deregister Instance From Load Balancer
 
 aws elb deregister-instances-from-load-balancer --load-balancer-name my-load-balancer --instances i-d6f6fae3
 
-9) To List Load Balancers
+10) To List Load Balancers
 
 aws elb describe-load-balancers
 
-10) To List Information of a Specific Load Balancer
+11) To List Information of a Specific Load Balancer
 
 aws elb describe-load-balancers --load-balancer-name my-load-balancer
 
-11) Associate Security Group to Load Balancer
+12) Associate Security Group to Load Balancer
 
 aws elb apply-security-groups-to-load-balancer --load-balancer-name my-load-balancer --security-groups sg-1234
 
-12) Attach Subnet to Load Balancer
+13) Attach Subnet to Load Balancer
 
 aws elb attach-load-balancer-to-subnets --load-balancer-name my-load-balancer --subnets subnet-1234
 
-13) De-Attach Subnet From Load Balancer
+14) De-Attach Subnet From Load Balancer
 
 aws elb detach-load-balancer-from-subnets --load-balancer-name my-load-balancer --subnets subnet-0ecac448
