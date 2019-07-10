@@ -1,1 +1,62 @@
+ELB - ALB & NLB
+
+1) Create Application Load Balancer
+
+aws elbv2 create-load-balancer --name my-load-balancer --subnets subnet-b7d581c0 subnet-8360a9e72
+
+2) Create Internal Private Facing ALB
+
+aws elbv2 create-load-balancer --name my-internal-load-balancer --scheme internal --subnets subnet-b7d581c0 subnet-8360a9e7
+
+3) Create Network Load Balancer
+
+aws elbv2 create-load-balancer --name my-network-load-balancer --type network --subnet-mappings SubnetId=subnet-b7d581c0,AllocationId=eipalloc-64d5890a
+
+4) Create Internal Private Facing NLB
+
+aws elbv2 create-load-balancer --name my-network-load-balancer --type network --scheme internal --subnet-mappings SubnetId=subnet-b7d581c0,AllocationId=eipalloc-64d5890a
+
+5) Create HTTP Listner
+
+aws elbv2 create-listener --load-balancer-arn arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188 --protocol HTTP --port 80 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067
+
+6) Create HTTPS Listner
+
+aws elbv2 create-listener --load-balancer-arn arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188 --protocol HTTPS --port 443 --certificates CertificateArn=arn:aws:acm:us-west-2:123456789012:certificate/3dcb0a41-bd72-4774-9ad9-756919c40557 --ssl-policy ELBSecurityPolicy-2016-08 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067
+
+7) Create TCP Listner
+
+aws elbv2 create-listener --load-balancer-arn arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/net/my-network-load-balancer/5d1b75f4f1cee11e --protocol TCP --port 80 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-tcp-targets/b6bba954d1361c78
+
+8) Create Target Group
+
+aws elbv2 create-target-group --name my-targets --protocol HTTP --port 80 --vpc-id vpc-1234
+
+9) Delete Listener
+
+aws elbv2 delete-listener --listener-arn arn:aws:elasticloadbalancing:ua-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2
+
+10) Delete Load Balancer
+
+aws elbv2 delete-load-balancer --load-balancer-arn arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188
+
+11) Delete Target Group 
+
+aws elbv2 delete-load-balancer --load-balancer-arn arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188
+
+12) Register Instance to Target Group
+
+aws elbv2 register-targets --target-group-arn arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067 --targets Id=i-80c8dd94 Id=i-ceddcd4d
+
+13) De-register Instance from Target Group 
+
+aws elbv2 deregister-targets --target-group-arn arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067 --targets Id=i-0f76fade
+
+14) Get Information of Load Balancer
+
+aws elbv2 describe-load-balancers --load-balancer-arns arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188
+
+15) Associate Security Group to Load Balancer
+
+aws elbv2 set-security-groups --load-balancer-arn arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188 --security-groups sg-5943793c
 
