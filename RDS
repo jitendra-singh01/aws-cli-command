@@ -1,0 +1,102 @@
+RDS
+
+1) Create MYSQL DB Instance
+
+aws rds create-db-instance \
+    --allocated-storage 20 --db-instance-class db.m1.small \
+    --db-instance-identifier test-instance \
+    --engine mysql \
+    --enable-cloudwatch-logs-exports '["audit","error","general","slowquery"]' \
+    --master-username master \
+    --master-user-password secret99
+
+Allowed Enginer Values - 
+
+aurora (for MySQL 5.6-compatible Aurora)
+aurora-mysql (for MySQL 5.7-compatible Aurora)
+aurora-postgresql
+mariadb
+mysql
+oracle-ee
+oracle-se2
+oracle-se1
+oracle-se
+postgres
+sqlserver-ee
+sqlserver-se
+sqlserver-ex
+sqlserver-web
+
+2) Create Read Replica 
+
+aws rds create-db-instance-read-replica \
+    --db-instance-identifier test-instance-repl \
+    --source-db-instance-identifier test-instance
+    
+3) Create DB Security Group
+
+aws rds create-db-security-group --db-security-group-name mysecgroup --db-security-group-description "My Test Security Group"
+
+4) Create DB Instance Snapshot
+
+aws rds  create-db-snapshot
+--db-snapshot-identifier test-instance-snap
+--db-instance-identifier test-instance
+
+5) Create DB Option Group
+
+aws rds create-option-group \
+    --option-group-name MyOptionGroup \
+    --engine-name oracle-ee \
+    --major-engine-version 11.2 \
+    --option-group-description "Oracle Database Manager Database Control"
+    
+6) Get Information of DB Instance
+
+aws rds describe-db-instances \
+    --db-instance-identifier test-instance
+  
+7) Get Information of Security Group
+
+aws rds describe-db-security-groups sec-group
+    
+8) Promote Read Replica 
+
+aws rds promote-read-replica \
+    --db-instance-identifier test-instance-repl
+
+9) Reboot DB Instance
+
+aws rds reboot-db-instance \
+    --db-instance-identifier test-instance
+
+10) Stop DB Instance
+
+aws rds stop-db-instance \
+    --db-instance-identifier test-instance
+    
+11) start DB Instance
+
+aws rds start-db-instance \
+    --db-instance-identifier test-instance
+    
+12) Delete DB Instance
+
+aws rds delete-db-instance \
+    --db-instance-identifier test-instance \
+    --final-db-snapshot-identifier test-instance-final-snap
+    
+13) Delete DB Security Group 
+
+aws rds delete-db-security-group \
+--db-security-group-name  mysecgroup
+
+14) Delete DB snapshot
+
+aws rds delete-db-snapshot \
+--db-snapshot-identifier snapshot-name
+
+15) Delete Options Group 
+
+aws rds delete-option-group \
+--option-group-name MyOptionGroup
