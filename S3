@@ -1,0 +1,44 @@
+S3
+
+Prerequisite :-
+
+AWS cli configured with Access key and secret access of a IAM User with EC2 Full access policy attached.
+
+Copying a local file to S3
+aws s3 cp test.txt s3://mybucket/test2.txt
+
+Copying a local file to S3 with an expiration date
+aws s3 cp test.txt s3://mybucket/test2.txt --expires 2014-10-01T20:30:00Z
+
+Copying a file from S3 to S3
+aws s3 cp s3://mybucket/test.txt s3://mybucket/test2.txt
+
+Copying an S3 object to a local file
+aws s3 cp s3://mybucket/test.txt test2.txt
+ 
+Copying an S3 object from one bucket to another
+aws s3 cp s3://mybucket/test.txt s3://mybucket2/
+
+Recursively copying S3 objects to a local directory
+aws s3 cp s3://mybucket . --recursive
+
+Recursively copying local files to S3
+aws s3 cp myDir s3://mybucket/ --recursive --exclude "*.jpg"
+
+List Buckets in AWS Account
+AWS S3 ls 
+
+List Content of a S3 Bucket
+aws s3 ls s3://mybucket
+
+Create S3 bucket
+aws s3 mb s3://mybucket --region us-west-1
+
+Move File from local system to S3
+aws s3 mv test.txt s3://mybucket/test2.txt
+
+Pre Signed object url
+aws s3 presign s3://awsexamplebucket/test2.txt --expires-in 604800
+
+Remove a Bucket
+aws s3 rb s3://mybucket
